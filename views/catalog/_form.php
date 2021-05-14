@@ -1,7 +1,9 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Catalog */
@@ -14,9 +16,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'category_id')->textInput() ?>
+    <?= $form->field($model, 'description')->textArea(['maxlength' => false]) ?>
+    <?
+    
+    $categoryes = Category::find()->all();
+    $items = ArrayHelper::map($categoryes,'id','name');
+    $params = [
+        'prompt' => 'Укажите категорию товара'
+    ];
+    
+    echo $form->field($model, 'category_id')->dropDownList($items,$params); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

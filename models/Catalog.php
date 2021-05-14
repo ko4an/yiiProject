@@ -33,7 +33,7 @@ class Catalog extends \yii\db\ActiveRecord
         return [
             [['name', 'description', 'category_id'], 'required'],
             [['category_id'], 'integer'],
-            [['name', 'description'], 'string', 'max' => 45],
+            [['name', 'description'], 'string', 'max' => 450],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }

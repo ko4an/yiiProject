@@ -1,7 +1,12 @@
 <?php
 
+
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\data\ActiveDataProvider;
+use yii\data\ArrayDataProvider;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Catalog */
@@ -29,11 +34,47 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'name',
-            'description',
-            'category_id',
+            'description'
         ],
-    ]) ?>
+    ]);
+    $provider = new ArrayDataProvider([
+        'allModels' => $model->items,
+        'pagination' => [
+            'pageSize' => 10,
+        ],
+    ]);
+    echo GridView::widget([
+        'dataProvider' => $provider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'number',
+            'info',
+            'compatibility.Granta',
+            'compatibility.Priora',
+            'compatibility.Xray',
+            'compatibility.Vesta',
+            [
+                'class' => \yii\grid\ActionColumn::class,
+                'template' => '{info}',
+                'buttons' => [
+                    'info' => function ($url, $model, $key) {
+                        $title = \Yii::t('yii', $model->id);
+                        $id = 'info-'.$key;
+                        $options = [
+                            'title' => $title,
+                            'aria-label' => $title,
+                            'data-pjax' => '0',
+                            'id' => $id
+                        ];
+                        $url = Url::current(['/orders/create/']);
+                        $icon = Html::tag('span', '', ['class' => "glyphicon glyphicon-ok"]);
+                        return Html::a($icon, $url, $options);
+                    },
+                ],
+            ],
+        ]
+    ])
+    ?>
 
 </div>

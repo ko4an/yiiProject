@@ -12,12 +12,14 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
-        'urlManager' => [
-          'showScriptName' => false,
-          'enablePrettyUrl' => true
-                  ], 
+        // 'urlManager' => [
+        //   'showScriptName' => false,
+        //   'enablePrettyUrl' => true,
+        //   'rules' => [
+        //     '' => 'site/index',
+        //     ],
+        // ], 
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'rlHbxGH-07SJg2CxXUTBQE4ooX6Uf5jY',
         ],
         'cache' => [
@@ -47,14 +49,12 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
+        // 'urlManager' => [
+        //     'enablePrettyUrl' => true,
+        //     'showScriptName' => false,
+        //     'rules' => [
+        //     ],
+        // ],
     ],
     'params' => $params,
 ];
